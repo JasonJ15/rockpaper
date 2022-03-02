@@ -48,7 +48,7 @@ function playRound(){
     }
 }
 
-
+// Loop for number of rounds to play per game. Displays score after set number of rounds and prompts user to play another game
 function game(){
     for (let i = 0; i < 5; i++){
         playRound()
@@ -57,7 +57,7 @@ function game(){
     playAgain()
 }
 
-
+// function to select winner
 function score(){
     if ( playerScore > compScore){
         console.log(`You win the game with a score of ${playerScore} - ${compScore}!`)
@@ -68,7 +68,7 @@ function score(){
     }
 }
 
-
+//function to prompt player if they would like to play again
 function playAgain(){
     let restart = prompt('Would you like to play again?')
     if ( restart.toUpperCase() == 'YES'){
@@ -79,5 +79,3 @@ function playAgain(){
 }
 
 game()
-//score()
-//playAgain()
