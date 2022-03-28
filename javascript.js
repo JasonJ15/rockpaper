@@ -1,4 +1,6 @@
 const options = ['ROCK', 'PAPER', 'SCISSORS'] // options for computer to select
+const optionBtn = document.querySelectorAll('div.options button');
+optionBtn.forEach(button => { button.addEventListener('click', getPlayerChoice) });
 
 //function for computer to select a random index location from array options
 function computerPlay(){
@@ -9,73 +11,80 @@ function computerPlay(){
 let playerScore = 0;
 let compScore = 0;
 
-//function to accept user prompt, convert string to all capitals, and compare it to compChoice to determine winner of round
-function playRound(){
-    let playerChoice = prompt('Pick Rock, Paper, or Scissors!')
+const output = document.querySelector('.output')
+
+function playRound(playerChoice){
     let compChoice = computerPlay()
-    if(playerChoice.toUpperCase() == 'ROCK'){
+    if(playerChoice == 'ROCK'){
         if (compChoice == 'ROCK'){
-            console.log('Draw, try again!')
+            output.textContent = 'Draw, try again!'
         } else if ( compChoice == 'PAPER'){
-            console.log('Computer picked paper. You lose!')
-            return compScore++
+            output.textContent = 'Computer picked paper. You lose!'
+            cScore.textContent = ++compScore
         } else{
-            console.log('Computer picked scissors. You win!')
-            return playerScore++
+            output.textContent = 'Computer picked scissors. You win!'
+            pScore.textContent = ++playerScore
         }
-    }else if (playerChoice.toUpperCase() == 'PAPER'){
+    }else if (playerChoice == 'PAPER'){
         if (compChoice == 'PAPER'){
-            console.log('Draw, try again!')
+            output.textContent = 'Draw, try again!'
         } else if ( compChoice == 'ROCK'){
-            console.log('Computer picked rock. You win!')
-            return playerScore++
+            output.textContent = 'Computer picked rock. You win!'
+            pScore.textContent = ++playerScore
         } else {
-            console.log('Computer picked scissors. You lose!')
-            return compScore++
+            output.textContent = 'Computer picked scissors. You lose!'
+            cScore.textContent = ++compScore
         }
-    } else if (playerChoice.toUpperCase() == 'SCISSORS'){
+    } else if (playerChoice == 'SCISSORS'){
         if (compChoice == 'SCISSORS'){
-            console.log('Draw, try again!')
+            output.textContent = 'Draw, try again!'
         } else if (compChoice == 'ROCK'){
-            console.log('Computer picked rock. You lose!')
-            return compScore++
+            output.textContent = 'Computer picked rock. You lose!'
+            cScore.textContent = ++compScore
         } else {
-            console.log('Computer picked paper. You win!')
-            return playerScore++
+            output.textContent = 'Computer picked paper. You win!'
+            pScore.textContent = ++playerScore
         }
     } else{
-        console.log('Invalid entry... Try again')
+        output.textContent = 'Invalid entry... Try again'
+        console.log(playerChoice)
     }
+    checkScore()
 }
 
-// Loop for number of rounds to play per game. Displays score after set number of rounds and prompts user to play another game
-function game(){
-    for (let i = 0; i < 5; i++){
-        playRound()
-    }
-    score()
-    playAgain()
-}
 
 // function to select winner
 function score(){
     if ( playerScore > compScore){
-        console.log(`You win the game with a score of ${playerScore} - ${compScore}!`)
-    } else if ( compScore > playerScore){
-        console.log(`You lost the game with a score of ${playerScore} - ${compScore}!`)
-    } else {
-        console.log(`The game was a tie with a score of ${playerScore} - ${compScore}!`)
+        output.textContent = `You win the game with a score of ${playerScore} - ${compScore}!`
+        reset()} 
+    else{
+        output.textContent = `You lost the game with a score of ${playerScore} - ${compScore}!`
+        reset()
     }
 }
 
-//function to prompt player if they would like to play again
-function playAgain(){
-    let restart = prompt('Would you like to play again?')
-    if ( restart.toUpperCase() == 'YES'){
-        game()
-    } else {
-        console.log('Thanks for playing. See you next time.')
+function checkScore(){
+    if (playerScore == 5 || compScore == 5){
+        score()
     }
 }
 
-game()
+let pScore = document.querySelector('.playerScore')
+pScore.textContent = playerScore
+
+let cScore = document.querySelector('.computerScore')
+cScore.textContent = compScore
+
+function getPlayerChoice(e) {
+    let playerChoice= (e.target.id);
+    playerChoice = e.target.textContent;
+    playRound(playerChoice, computerPlay());
+  }
+
+  function reset(){
+      playerScore = 0
+      compScore = 0
+      pScore.textContent = 0
+      cScore.textContent = 0
+  }
