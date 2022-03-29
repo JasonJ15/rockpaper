@@ -70,10 +70,10 @@ function checkScore(){
     }
 }
 
-let pScore = document.querySelector('.playerScore')
+let pScore = document.querySelector('#playerScore')
 pScore.textContent = playerScore
 
-let cScore = document.querySelector('.computerScore')
+let cScore = document.querySelector('#computerScore')
 cScore.textContent = compScore
 
 function getPlayerChoice(e) {

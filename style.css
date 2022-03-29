@@ -2,17 +2,7 @@ body{
     background: #506854
 }
 
-.playerScore{
-    width: 125px;
-    height: 125px;
-    border: solid #96BC24 3px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.computerScore{
+.scoresOut{
     width: 125px;
     height: 125px;
     border: solid #96BC24 3px;
